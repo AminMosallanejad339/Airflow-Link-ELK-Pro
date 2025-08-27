@@ -35,6 +35,14 @@ Airflow-Link-ELK-Pro/
 
 ## Setup & Docker Compose
 
+First create the shared network (only once):
+
+```
+docker network create shared-net
+```
+
+Then bring up each stack with its name:
+
 1. **Start Elasticsearch & Kibana:**
 
 ```bash
@@ -127,7 +135,44 @@ docker exec -it airflow-elk-pro-airflow-apiserver-1 bash
 airflow connections list
 ```
 
+You should update your Airflow connection like this:
+
+```
+docker exec -it airflow-elk-pro-airflow-apiserver-1 \
+airflow connections delete elasticsearch_default
+
+docker exec -it airflow-elk-pro-airflow-apiserver-1 \
+airflow connections add "elasticsearch_default" \
+--conn-type "http" \
+--conn-host "es01" \
+--conn-port 9200 \
+--conn-login "elastic" \
+--conn-password "@Anubis1274" \
+--conn-extra '{"use_ssl": true, "verify_certs": false}'
+```
+
+**Notes:**
+
+- `use_ssl: true` tells the Elasticsearch hook to use HTTPS.
+- `verify_certs: false` skips certificate verification since you’re using the default self-signed Docker cert.
+
 - Example Elasticsearch connection (`elasticsearch_default`):
+
+- In your DAG, you are using:
+
+  ```
+  'http://es01:9200/'
+  ```
+
+  - `es01` only works if your **Airflow container can resolve it**.
+  - If Airflow and Elasticsearch are in **different Docker networks**, Airflow won’t reach it.
+  - You can test this **inside the Airflow container**:
+
+  ```
+  docker exec -it <airflow_container> ping es01
+  ```
+
+  If it fails, you need to use **localhost** with a mapped port (or the IP of the Elasticsearch container).
 
 | conn_id | conn_type     | host | schema | login   | password    | port | extra                                    |
 | ------- | ------------- | ---- | ------ | ------- | ----------- | ---- | ---------------------------------------- |
@@ -169,6 +214,21 @@ from elasticsearch_hook import ElasticsearchHook
 ------
 
 ## DAG Examples
+
+1. dags list : 
+
+```
+docker exec -it airflow-elk-pro-airflow-apiserver-1 airflow dags list
+```
+
+###  Trigger DAGs manually (optional)
+
+- For testing, you can manually trigger a DAG:
+
+```
+docker exec -it airflow-elk-pro-airflow-apiserver-1 \
+airflow dags trigger elasticsearch_operations
+```
 
 ### 1. Test Elasticsearch Connection
 
