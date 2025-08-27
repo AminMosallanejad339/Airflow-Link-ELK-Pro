@@ -181,7 +181,7 @@ from requests.auth import HTTPBasicAuth
 
 def test_es_conn():
     response = requests.get(
-        'http://es01:9200/',
+        'https://es01:9200/',
         auth=HTTPBasicAuth('elastic', '@Anubis1274'),
         verify=False
     )
@@ -207,7 +207,7 @@ def generate_kibana_data():
         "value": random.randint(1,100)
     }
     requests.post(
-        'http://es01:9200/kibana_sample/_doc',
+        'https://es01:9200/kibana_sample/_doc',
         auth=HTTPBasicAuth('elastic', '@Anubis1274'),
         json=doc,
         verify=False
@@ -241,7 +241,7 @@ with DAG('kibana_data_pipeline', start_date=datetime(2023,1,1), schedule_interva
 - [Elasticsearch 9.1 Documentation](https://www.elastic.co/guide/en/elasticsearch/reference/9.1/index.html)
 - [Kibana Dev Tools](https://www.elastic.co/guide/en/kibana/current/dev-tools.html)
 
-## Acknoledgment
+## Acknowledgment
 
 ![2025-08-27-053555](2025-08-27-053555.png)
 
