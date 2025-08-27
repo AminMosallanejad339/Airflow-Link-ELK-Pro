@@ -4,20 +4,6 @@ This project demonstrates a fully functional integration of **Apache Airflow 3.0
 
 ------
 
-## Table of Contents
-
-- [Requirements](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#requirements)
-- [Project Structure](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#project-structure)
-- [Setup & Docker Compose](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#setup--docker-compose)
-- [Elasticsearch Access](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#elasticsearch-access)
-- [Kibana Dev Tools Testing](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#kibana-dev-tools-testing)
-- [Airflow Connections Configuration](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#airflow-connections-configuration)
-- [Plugins Setup](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#plugins-setup)
-- [DAG Examples](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#dag-examples)
-- [Troubleshooting](https://chatgpt.com/c/68ae3c6b-95b0-8327-a857-254b7dda2716#troubleshooting)
-
-------
-
 ## Requirements
 
 - Docker >= 24
@@ -267,3 +253,4 @@ Learn the **entire process**, from developing data pipelines to deploying them o
 
 **Instructor:** Dr. Mohammad Fazouni  
 **Course Start Date:** August 9, 2025
+
